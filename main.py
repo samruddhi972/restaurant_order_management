@@ -1,34 +1,97 @@
-Welcome to MY Restaurant!
+def main():
+    print("Welcome to MY Restaurant!\n")
 
-What time is it? (e.g., 7:30 a.m. or 13:00): 7:37 
-It's breakfast time 
+    
+    time = input("What time is it? (e.g., 7:30 a.m. or 13:00): ")
+    time_float = convert(time)
 
-MENU
+    if 7.0 <= time_float <= 8.0:
+        print("It's breakfast time \n")
+    elif 12.0 <= time_float <= 13.0:
+        print("It's lunch time \n")
+    elif 18.0 <= time_float <= 19.0:
+        print("It's dinner time \n")
+    else:
+        print("We're open all day! \n")
 
-Pizza: ₹40
-Burger: ₹30
-Samosa: ₹10
-Cocktail: ₹30
-Coffee: ₹20
+    #  menu
+    print("MENU\n")
 
-Please place your order below:
+    items = {
+        'pizza': 40,
+        'burger': 30,
+        'samosa': 10,
+        'cocktail': 30,
+        'coffee': 20
+    }
 
-Enter the name of the item you want to order: coffee
-Your item 'coffee' is added to your order.
-Do you want to order another item? (yes/no): yes
+    for item, price in items.items():
+        print(f"{item.capitalize()}: ₹{price}")
 
-Enter the name of the item you want to order: samosa
-Your item 'samosa' is added to your order.
-Do you want to order another item? (yes/no): no
+    print("\nPlease place your order below:")
 
-Your total bill is: ₹30
+    order_total = 0
 
------ Checkout -----
-Select your payment method:
-1. UPI
-2. Cash
-3. Card
-Enter your choice (1/2/3): 1
-You selected UPI. Please scan the QR code to complete your payment.
+    while True:
+        item = input("\nEnter the name of the item you want to order: ").lower()
 
-Thank you for ordering from MY Restaurant! Have a great day!
+        if item in items:
+            order_total += items[item]
+            print(f"Your item '{item}' is added to your order.")
+        else:
+            print(f"Sorry, '{item}' is not available.")
+
+        another = input("Do you want to order another item? (yes/no): ").lower()
+        if another != "yes":
+            break
+
+    print(f"\nYour total bill is: ₹{order_total}")
+
+    # Checkout
+    print("\n----- Checkout -----")
+    print("Select your payment method:")
+    print("1. UPI")
+    print("2. Cash")
+    print("3. Card")
+
+    while True:
+        payment = input("Enter your choice (1/2/3): ")
+
+        if payment == "1":
+            print("You selected UPI. Please scan the QR code to complete your payment. ")
+            break
+        elif payment == "2":
+            print("You selected Cash. Please pay the amount at the counter. ")
+            break
+        elif payment == "3":
+            print("You selected Card. Please insert your card and enter your PIN. ")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+    print("\nThank you for ordering from MY Restaurant! Have a great day! ")
+
+
+def convert(time):
+    time = time.strip().lower()
+
+    if "a.m." in time or "p.m." in time:
+        time, period = time.split()
+        hours, minutes = time.split(":")
+        hours = int(hours)
+        minutes = int(minutes)
+
+        if period == "p.m." and hours != 12:
+            hours += 12
+        elif period == "a.m." and hours == 12:
+            hours = 0
+    else:
+        hours, minutes = time.split(":")
+        hours = int(hours)
+        minutes = int(minutes)
+
+    return hours + minutes / 60
+
+
+if __name__ == "__main__":
+    main()
