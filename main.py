@@ -1,36 +1,34 @@
-print("Welcome to Sam Restaurant!\n")
-print("MENU\n")
+Welcome to MY Restaurant!
 
+What time is it? (e.g., 7:30 a.m. or 13:00): 7:37 
+It's breakfast time 
 
-items = {
-    'pizza': 40,
-    'burger': 30,
-    'samosa': 10,
-    'cocktail': 30,
-    'coffee': 20
-}
+MENU
 
+Pizza: ₹40
+Burger: ₹30
+Samosa: ₹10
+Cocktail: ₹30
+Coffee: ₹20
 
-for item, price in items.items():
-    print(f"{item.capitalize()}: ₹{price}")
+Please place your order below:
 
-print("\nPlease place your order below:")
+Enter the name of the item you want to order: coffee
+Your item 'coffee' is added to your order.
+Do you want to order another item? (yes/no): yes
 
-order_total = 0
+Enter the name of the item you want to order: samosa
+Your item 'samosa' is added to your order.
+Do you want to order another item? (yes/no): no
 
+Your total bill is: ₹30
 
-while True:
-    item = input("\nEnter the name of the item you want to order: ").lower()
+----- Checkout -----
+Select your payment method:
+1. UPI
+2. Cash
+3. Card
+Enter your choice (1/2/3): 1
+You selected UPI. Please scan the QR code to complete your payment.
 
-    if item in items:
-        order_total += items[item]
-        print(f" Your item '{item}' is added to your order.")
-    else:
-        print(f" Sorry, '{item}' is not available.")
-
-    another = input("Do you want to order another item? (yes/no): ").lower()
-    if another != "yes":
-        break
-
-print(f"\n Your total bill is: ₹{order_total}")
-print(" Thank you for ordering from Sam Restaurant!")
+Thank you for ordering from MY Restaurant! Have a great day!
